@@ -5,17 +5,18 @@
 #              It allows users to add tasks, list tasks, and mark tasks as completed.
 
 # 
-
 tasks = []
 
+# todo
 def show_tasks():
     for index, task in enumerate(tasks, start=1):
         print(f"{index}. {task['name']} - {'Done' if task['completed'] else 'Not Done'}")
 
+# todo
 def add_task(task_name):
     tasks.append({"name": task_name, "completed": False})
 
-# 
+# todo
 def complete_task(task_number):
     if task_number <= len(tasks) and task_number > 0:
         tasks[task_number - 1]['completed'] = True
