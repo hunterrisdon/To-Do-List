@@ -7,7 +7,6 @@
 # Imports
 import json
 
-
 # List to store tasks
 tasks = []
 
