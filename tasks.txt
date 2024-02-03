@@ -1,2 +1,1 @@
-{"name": "Learn how to code", "completed": false}
-{"name": "Upload new file to github", "completed": true}
+{"name": "learn how to code in python", "completed": false}

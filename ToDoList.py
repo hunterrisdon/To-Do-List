@@ -23,7 +23,6 @@ def add_task(task_name):
 
 # Function to mark a task as completed
 def complete_task(task_number):
-    show_tasks()
     if task_number <= len(tasks) and task_number > 0:
         tasks[task_number - 1]['completed'] = True
     else:
@@ -35,7 +34,8 @@ def get_user_choice():
     print("1. Add Task")
     print("2. Show Tasks")
     print("3. Complete a Task")
-    print("4. Exit")
+    print("4. Clear All Tasks")
+    print("5. Exit")
     print("\nEnter a number:")
     return input()
 
@@ -43,7 +43,8 @@ def get_user_choice():
 def save_tasks():
     with open("tasks.txt", "w") as file:
         for task in tasks:
-            file.write(json.dumps(task) + "\n")
+            if not task["completed"]: # Doesn't save completed tasks
+                file.write(json.dumps(task) + "\n")
 
 # Function to load tasks from file
 def load_tasks():
@@ -53,6 +54,10 @@ def load_tasks():
                 tasks.append(json.loads(line.strip()))
     except FileNotFoundError:
         pass # Previous task list does not exist
+
+# Function to clear tasks
+def clear_tasks():
+    tasks.clear()
 
 # Main
 def main():
@@ -68,9 +73,13 @@ def main():
         elif user_choice == "2":
             show_tasks()
         elif user_choice == "3":
-            task_number = int(input("Enter task number to complete: "))
+            show_tasks()
+            task_number = int(input("\nEnter task number to complete: "))
             complete_task(task_number)
         elif user_choice == "4":
+            clear_tasks()
+            print("Tasks cleared!")
+        elif user_choice == "5":
             print("Saving...")
             save_tasks() # Save tasks before exiting
             print("Exiting...")
